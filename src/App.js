@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Nav from './components/nav';
+import Event from './components/event';
+import data from './events.json';
 
 class App extends Component {
   render() {
+    console.log('log data', data.events)
+    const allEvents = data.events.map((el, i) => <Event eventData={el} key={i} />)
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        
+        <Nav />
+
+        <div className="container">
+          <div className="row">
+            <div className="col-xs-12 col-md-8 offset-md-2">
+              <ul className="list-group">
+                {allEvents}
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
