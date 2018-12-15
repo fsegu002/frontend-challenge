@@ -5,9 +5,31 @@ import Event from './components/event';
 import data from './events.json';
 
 class App extends Component {
+  state = {
+    events: []
+  }
+
+  /**
+   * load events into component as soon as component mounts
+   */
+  componentDidMount() {
+    const sortedEvents = this.sortEvents(data.events)
+    this.setState({ events: sortedEvents })
+  }
+
+  /**
+   * Sort events in array by event_start date and time
+   * @param {array} eventsArr 
+   */
+  sortEvents(eventsArr) {
+    return eventsArr.sort((a, b) => {
+      return new Date(b.event_start) - new Date(a.event_start)
+    })
+  }
+  
   render() {
-    console.log('log data', data.events)
-    const allEvents = data.events.map((el, i) => <Event eventData={el} key={i} />)
+    
+    const allEvents = this.state.events.map((el, i) => <Event eventData={el} key={i} />)
     return (
       <div className="App">
         
