@@ -80,13 +80,8 @@ class App extends Component {
               <Filter callFilter={this.filterEvents} 
                       resetFilter={this.clearFilter}
                       numberOfResults={this.state.events.length}/>
-            </div>
-          </div>
-        </div>
-
-        <div className="container">
-          <div className="row">
-            <div className="col-xs-12 col-md-8 offset-md-2">
+            
+            
               <ul className="list-group">
                 {allEvents}
               </ul>
