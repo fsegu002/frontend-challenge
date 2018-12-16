@@ -12,6 +12,7 @@ class Event extends Component {
                 <p>Account: {account.name}</p>
                 <p>From: {event_start}</p>
                 <p>To: {event_end}</p>
+                <p>{status}</p>
             </li>
         );
     }

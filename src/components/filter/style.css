@@ -1,0 +1,30 @@
+.filterControl{
+    margin-bottom: 20px;
+}
+
+#filterInput{
+    padding-right: 38px;
+}
+
+.resetBtn{
+    position: absolute;
+    top: 0;
+    right: 16px;
+    background-color: transparent;
+    font-size: 1.6em;
+    border: 0;
+    height: 38px;
+    width: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.resetBtn > div{
+    margin-top: -4px;
+}
+.resetBtn:hover {
+    cursor: pointer;
+}
+.resetBtn.focus, .resetBtn:focus{
+    outline: none;
+}
