@@ -68,9 +68,9 @@
 }
 
 
-.PROSPECT{ background-color: yellow;}
-.TENTATIVE{ background-color: orange; }
-.DEFINITE{ background-color: rebeccapurple;}
-.CLOSED{ background-color: blue;}
-.LOST{ background-color: red;}
-.WAITLIST{ background-color: grey;}
+.PROSPECT{ background-color: #89c6ca;}
+.TENTATIVE{ background-color: #d96c6e;}
+.DEFINITE{ background-color: #89be9d;}
+.CLOSED{ background-color: #d5cc8c;}
+.LOST{ background-color: #746E64;}
+.WAITLIST{ background-color: #1c1253;}
