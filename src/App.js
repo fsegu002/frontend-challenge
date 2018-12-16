@@ -4,10 +4,13 @@ import Nav from './components/nav';
 import Event from './components/event';
 import Filter from './components/filter';
 import data from './events.json';
+import Pagination from './components/pagination';
 
 class App extends Component {
   state = {
-    events: []
+    events: [],
+    allEvents: [],
+    paginate: null
   }
 
   /**
@@ -15,6 +18,7 @@ class App extends Component {
    */
   componentDidMount() {
     this.resetState()
+    this.paginate(data.events, {offset:1, limit:10})
   }
 
   /**
@@ -42,7 +46,12 @@ class App extends Component {
       }
       return false
     })
-    this.setState({ events: filteredEvents }, () => console.log(this.state.events.length))
+    let paginate = new Pagination(filteredEvents, {offset: 1, limit: 10})
+    this.setState({
+      events: paginate.pageResults,
+      allEvents: filteredEvents,
+      paginate
+    })
     
   }
 
@@ -61,7 +70,21 @@ class App extends Component {
   resetState = this.resetState.bind(this)
   resetState() {
     const sortedEvents = this.sortEvents(data.events)
-    this.setState({ events: sortedEvents })
+    let newPage = new Pagination(sortedEvents, {offset: 1, limit: 10})
+    this.setState({ 
+      events: newPage.pageResults,
+      allEvents: sortedEvents,
+      paginate: newPage
+    })
+  }
+
+  paginate = this.paginate.bind(this)
+  paginate(arr, options) {
+    let newPage = new Pagination(arr, options)
+    this.setState({ 
+      paginate: newPage,
+      events: newPage.pageResults
+    })
   }
 
   
@@ -79,7 +102,8 @@ class App extends Component {
             <div className="col-xs-12 col-md-8 offset-md-2">
               <Filter callFilter={this.filterEvents} 
                       resetFilter={this.clearFilter}
-                      numberOfResults={this.state.events.length}/>
+                      numberOfResults={this.state.allEvents.length}
+                      limit={this.state.events.length}/>
             
             
               <ul className="list-group">

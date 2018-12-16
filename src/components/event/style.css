@@ -61,10 +61,15 @@
     right: 10px;
     padding: 1px 12px;
     border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding-top: 2px; */
 }
 .event .eventInfo .status span{
-    color: #666;
+    color: #ffffff;
     font-size: 0.7em;
+    margin-top: 2px;
 }
 
 
