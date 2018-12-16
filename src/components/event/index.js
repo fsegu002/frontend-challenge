@@ -25,7 +25,9 @@ export default function Event(props) {
                     <span>{timeStart} - {timeEnd}</span>
                 </div>
                 
-                <p>{status}</p>
+                <div className={"status " + status}>
+                    <span>{status}</span>
+                </div>
             </div>
         </li>
     )

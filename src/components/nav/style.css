@@ -1,7 +1,19 @@
 nav{
     height: 48px;
-    background-color: #4f4f4f;
+    width: 100%;
+    background-color: #262a42;
     margin-bottom: 20px;
     
     color: #fff;
+}
+nav .navTitle{
+    display: flex;
+    align-items: center;
+    height: 48px;
+}
+nav .navTitle img{
+    margin-right: 20px;
+}
+nav .navTitle h4{
+    margin: 0;
 }

@@ -1,6 +1,5 @@
 .event{
     color: #292d44;
-    font-family: Arial, Helvetica, sans-serif;
     list-style-type: none;
     margin-bottom: 8px;
     -webkit-box-shadow: 0 1px 1px 1px rgba(0,0,0,0.2);
@@ -23,6 +22,8 @@
     left: 0;
     height: 100%;
     width: 5px;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
 }
 
 .event .eventDate .dateContainer{
@@ -43,6 +44,10 @@
     text-transform: lowercase;
 }
 
+.event .eventInfo{
+    padding: 8px 8px 8px 0;
+    position: relative;
+}
 .event .eventInfo .title{
     color: #147182;
     font-size: 1.5em;
@@ -50,10 +55,22 @@
 .event .eventInfo .details{
     font-size: 0.8em;
 }
+.event .eventInfo .status{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 1px 12px;
+    border-radius: 10px;
+}
+.event .eventInfo .status span{
+    color: #666;
+    font-size: 0.7em;
+}
 
-.statusLight.PROSPECT{ background-color: yellow;}
-.statusLight.TENTATIVE{ background-color: orange; }
-.statusLight.DEFINITE{ background-color: rebeccapurple;}
-.statusLight.CLOSED{ background-color: blue;}
-.statusLight.LOST{ background-color: red;}
-.statusLight.WAITLIST{ background-color: grey;}
+
+.PROSPECT{ background-color: yellow;}
+.TENTATIVE{ background-color: orange; }
+.DEFINITE{ background-color: rebeccapurple;}
+.CLOSED{ background-color: blue;}
+.LOST{ background-color: red;}
+.WAITLIST{ background-color: grey;}
