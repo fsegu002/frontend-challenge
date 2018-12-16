@@ -1,33 +1,59 @@
-li.event{
+.event{
+    color: #292d44;
+    font-family: Arial, Helvetica, sans-serif;
     list-style-type: none;
-    border: solid 1px #e4e4e4;
     margin-bottom: 8px;
     -webkit-box-shadow: 0 1px 1px 1px rgba(0,0,0,0.2);
     -moz-box-shadow: 0 1px 1px 1px rgba(0,0,0,0.2);
     box-shadow: 0 1px 1px 1px rgba(0,0,0,0.2);
     border-radius: 2px;
     display: grid;
-    grid-template-columns: 30% auto;
+    grid-template-columns: 138px auto;
 }
 
-li.event .eventDate{
+.event .eventDate{
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+.event .eventDate .statusLight{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 5px;
+}
 
-li.event .eventDate .dateContainer{
+.event .eventDate .dateContainer{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-li.event .eventDate div{
+.event .eventDate div{
     line-height: 1em;
 }
-li.event .eventDate .eventDay{
+.event .eventDate .eventDay{
     font-size: 3em;
 }
-li.event .eventDate .eventMonth{
+.event .eventDate .eventMonth{
+    font-size: 1.5em;
+    color: #e87e81;
+    text-transform: lowercase;
+}
+
+.event .eventInfo .title{
+    color: #147182;
     font-size: 1.5em;
 }
+.event .eventInfo .details{
+    font-size: 0.8em;
+}
+
+.statusLight.PROSPECT{ background-color: yellow;}
+.statusLight.TENTATIVE{ background-color: orange; }
+.statusLight.DEFINITE{ background-color: rebeccapurple;}
+.statusLight.CLOSED{ background-color: blue;}
+.statusLight.LOST{ background-color: red;}
+.statusLight.WAITLIST{ background-color: grey;}

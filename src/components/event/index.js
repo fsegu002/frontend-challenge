@@ -11,16 +11,19 @@ export default function Event(props) {
     return (
         <li className="event" >
             <div className="eventDate">
+                <div className={"statusLight " + status}></div>
                 <div className="dateContainer">
                     <div className="eventDay">{startDay}</div>
                     <div className="eventMonth">{startMonth}</div>
                 </div>
             </div>
             <div className="eventInfo">
-                <h3>{name}</h3>
-                <p>Contact: {contact.full_name}</p>
-                <p>Account: {account.name}</p>
-                <p>{timeStart} - {timeEnd}</p>
+                <h3 className="title">{name}</h3>
+                <div className="details">
+                    <span>For: {contact.full_name}</span><br/>
+                    <span>{account.name}</span><br/>
+                    <span>{timeStart} - {timeEnd}</span>
+                </div>
                 
                 <p>{status}</p>
             </div>
