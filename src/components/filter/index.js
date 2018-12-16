@@ -30,7 +30,7 @@ function Filter({callFilter, resetFilter, numberOfResults}) {
                     <div onClick={resetFilter}>&times;</div>
                 </button>
             </div>            
-            <div >{numberOfResults} results</div>
+            <div className="resultsCounter">{numberOfResults} results</div>
         </div>
     )
 }

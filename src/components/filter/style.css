@@ -28,3 +28,8 @@
 .resetBtn.focus, .resetBtn:focus{
     outline: none;
 }
+
+.resultsCounter{
+    padding: 5px 15px;
+    color: #666;
+}
