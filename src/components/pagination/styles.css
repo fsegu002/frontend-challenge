@@ -1,0 +1,18 @@
+#paginationNav ul.pagination{
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+}
+
+#paginationNav ul .prevButton{
+    display: flex;
+    justify-content: flex-end;
+}
+#paginationNav ul .nextButton{
+    display: flex;
+    justify-content: flex-start;
+}
+#paginationNav ul .pageCounter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

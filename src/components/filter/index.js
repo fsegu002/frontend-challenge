@@ -1,7 +1,7 @@
 import React from 'react'
 import './style.css'
 
-function Filter({callFilter, resetFilter, numberOfResults, limit}) {
+function Filter({callFilter, resetFilter, numberOfResults}) {
     let typingTimer;
 
     let handleChange = (e) => {
@@ -30,7 +30,7 @@ function Filter({callFilter, resetFilter, numberOfResults, limit}) {
                     <div onClick={resetFilter}>&times;</div>
                 </button>
             </div>            
-            <div className="resultsCounter">{limit} of {numberOfResults} results</div>
+            <div className="resultsCounter">{numberOfResults} results</div>
         </div>
     )
 }

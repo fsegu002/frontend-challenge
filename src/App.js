@@ -4,7 +4,8 @@ import Nav from './components/nav';
 import Event from './components/event';
 import Filter from './components/filter';
 import data from './events.json';
-import Pagination from './utilities/pagination';
+import PaginationService from './utilities/pagination';
+import Pagination from './components/pagination';
 
 class App extends Component {
   state = {
@@ -78,7 +79,7 @@ class App extends Component {
    */
   paginate = this.paginate.bind(this)
   paginate(arr, options) {
-    let newPage = new Pagination(arr, options)
+    let newPage = new PaginationService(arr, options)
     this.setState({ 
       paginate: newPage,
       events: newPage.pageResults,
@@ -99,8 +100,8 @@ class App extends Component {
   /**
    * Go to next page
    */
-  goToNext = this.goToNext.bind(this)
-  goToNext() {
+  goToNextPage = this.goToNextPage.bind(this)
+  goToNextPage() {
     this.state.paginate.goToNext()
     this.setState({ events: this.state.paginate.pageResults })
     this.scrollPageTop()
@@ -137,16 +138,8 @@ class App extends Component {
                 {allEvents}
               </ul>
 
-
-              <nav aria-label="Page navigation example">
-                <ul className="pagination">
-                  { (!this.state.paginate.prevPage) ? null : <button className="page-link" onClick={this.goToPrevPage} >Previous</button>}
-                  
-                  Page {this.state.paginate.currentPage} of {this.state.paginate.numberOfPages}
-
-                  { (!this.state.paginate.nextPage) ? null : <button className="page-link" onClick={this.goToNext} >Next</button>}
-                </ul>
-              </nav>
+              <Pagination page={this.state.paginate} nextPage={this.goToNextPage} prevPage={this.goToPrevPage} />
+              
             </div>
           </div>
         </div>

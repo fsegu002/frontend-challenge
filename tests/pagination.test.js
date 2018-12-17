@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import { expect } from 'chai';
-import Pagination from '../src/utilities/pagination';
+import PaginationService from '../src/utilities/pagination';
 
 let arr = [];
 before(() => {
@@ -15,16 +15,16 @@ describe('Pagination', () => {
             offset: 3,
             limit: 10
         }
-        let pag = new Pagination(arr, options );
+        let pag = new PaginationService(arr, options );
 
-        expect(pag).to.be.instanceOf(Pagination)
+        expect(pag).to.be.instanceOf(PaginationService)
     })
     it('should have 6 pages when passing 120 results and a limit of 20 per page', () => {
         let options = {
             offset: 3,
             limit: 20
         }
-        let pag = new Pagination(arr, options );
+        let pag = new PaginationService(arr, options );
 
         expect(pag.numberOfPages).to.equal(6);
     })
@@ -33,7 +33,7 @@ describe('Pagination', () => {
             offset: 1,
             limit: 10
         }
-        let pag = new Pagination(arr, options );
+        let pag = new PaginationService(arr, options );
         expect(pag.prevPage).to.equal(null)
     })
     it('should not have a next page when currentPage is the last page', () => {
@@ -41,7 +41,7 @@ describe('Pagination', () => {
             offset: 12,
             limit: 10
         }
-        let pag = new Pagination(arr, options );
+        let pag = new PaginationService(arr, options );
         expect(pag.nextPage).to.equal(null)
     })
     it('should throw an error when offset is over the range of pages', () => {
@@ -49,14 +49,14 @@ describe('Pagination', () => {
             offset: 15,
             limit: 10
         }
-        expect(() => new Pagination(arr, options )).to.throw("Offset is greater than the number of pages available.");
+        expect(() => new PaginationService(arr, options )).to.throw("Offset is greater than the number of pages available.");
     })
     it('should go to next page when goToNext is executed', () => {
         let options = {
             offset: 1,
             limit: 10
         }
-        let page = new Pagination(arr, options)
+        let page = new PaginationService(arr, options)
         page.goToNext()
 
         expect(page.currentPage).to.equal(2)
@@ -68,7 +68,7 @@ describe('Pagination', () => {
             offset: 4,
             limit: 10
         }
-        let page = new Pagination(arr, options)
+        let page = new PaginationService(arr, options)
         page.goToPrev()
 
         expect(page.currentPage).to.equal(3)

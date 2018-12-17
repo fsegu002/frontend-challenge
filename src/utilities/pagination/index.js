@@ -1,4 +1,4 @@
-export default function Pagination(objectArr, options) {
+export default function PaginationService(objectArr, options) {
     this.objectArr = objectArr
     this.limit = options.limit || 10;
     this.numberOfPages = Math.ceil(objectArr.length / this.limit);
@@ -14,21 +14,21 @@ export default function Pagination(objectArr, options) {
 
 }
 
-Pagination.prototype.calculatePages = function() {
+PaginationService.prototype.calculatePages = function() {
         this.prevPage = (this.currentPage > 1) ? this.currentPage - 1 : null;
         this.nextPage = (this.currentPage < this.numberOfPages) ? this.currentPage + 1 : null;
-        let resultOffset = Pagination.calculateOffset(this.offset, this.limit)
+        let resultOffset = PaginationService.calculateOffset(this.offset, this.limit)
         this.pageResults = this.objectArr.slice(resultOffset, resultOffset + this.limit)
 }
 
-Pagination.prototype.goToNext = function() {
+PaginationService.prototype.goToNext = function() {
     if(this.currentPage !== this.numberOfPages) {
         this.currentPage++
         this.offset++
         this.calculatePages()
     }        
 }
-Pagination.prototype.goToPrev = function() {
+PaginationService.prototype.goToPrev = function() {
     if(this.currentPage !== 1) {
         this.currentPage--
         this.offset--
@@ -36,6 +36,6 @@ Pagination.prototype.goToPrev = function() {
     }
 }
 
-Pagination.calculateOffset = (offset, limit) => {
+PaginationService.calculateOffset = (offset, limit) => {
     return (offset * limit) - (limit - 1)
 }
