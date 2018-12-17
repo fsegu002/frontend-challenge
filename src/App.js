@@ -54,7 +54,7 @@ class App extends Component {
         }
         return false
       })
-      this.paginate(filteredEvents, {offset: 1, limit: 10})
+      this.paginate(filteredEvents, {offset: 1, limit: 15})
       this.setState({allEvents: filteredEvents})
     } catch(e) {
       console.error('error', e)

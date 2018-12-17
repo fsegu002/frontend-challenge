@@ -21,7 +21,9 @@ PaginationService.prototype.calculatePages = function() {
         this.prevPage = (this.currentPage > 1) ? this.currentPage - 1 : null;
         this.nextPage = (this.currentPage < this.numberOfPages) ? this.currentPage + 1 : null;
         let resultOffset = PaginationService.calculateOffset(this.offset, this.limit)
-        this.pageResults = this.objectArr.slice(resultOffset, resultOffset + this.limit)
+        console.log('offset: ', resultOffset)
+        console.log('end: ', (resultOffset+this.limit))
+        this.pageResults = this.objectArr.slice(resultOffset, (resultOffset + this.limit))
 }
 
 PaginationService.prototype.goToNext = function() {
@@ -40,5 +42,5 @@ PaginationService.prototype.goToPrev = function() {
 }
 
 PaginationService.calculateOffset = (offset, limit) => {
-    return (offset * limit) - (limit - 1)
+    return (offset * limit) - (limit)
 }
