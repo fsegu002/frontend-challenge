@@ -44,13 +44,6 @@ describe('Pagination', () => {
         let pag = new PaginationService(arr, options );
         expect(pag.nextPage).to.equal(null)
     })
-    it('should throw an error when offset is over the range of pages', () => {
-        let options = {
-            offset: 15,
-            limit: 10
-        }
-        expect(() => new PaginationService(arr, options )).to.throw("Offset is greater than the number of pages available.");
-    })
     it('should go to next page when goToNext is executed', () => {
         let options = {
             offset: 1,

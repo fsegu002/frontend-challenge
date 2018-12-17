@@ -6,6 +6,7 @@ import Filter from './components/filter';
 import data from './events.json';
 import PaginationService from './utilities/pagination';
 import Pagination from './components/pagination';
+import Alert from './components/alert';
 
 class App extends Component {
   state = {
@@ -15,7 +16,8 @@ class App extends Component {
     pOptions: {
       offset: 1,
       limit: 15
-    }
+    },
+    error: false
   }
 
   /**
@@ -41,17 +43,23 @@ class App extends Component {
    */
   filterEvents = this.filterEvents.bind(this)
   filterEvents(searchTerm) {
-    const sortedEvents = this.sortEvents(data.events)
-    let filteredEvents = sortedEvents.filter(el => {
-      let rgx = new RegExp( searchTerm , 'i')
-      let matchString = el.name.match(rgx)
-      if(matchString !== null) {
-        return el
-      }
-      return false
-    })
-    this.paginate(filteredEvents, {offset: 1, limit: 10})
-    this.setState({allEvents: filteredEvents})
+    try{
+      const sortedEvents = this.sortEvents(data.events)
+      let filteredEvents = sortedEvents.filter(el => {
+        let cleanedString = searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+        let rgx = new RegExp( cleanedString , 'i')
+        let matchString = el.name.match(rgx)
+        if(matchString !== null) {
+          return el
+        }
+        return false
+      })
+      this.paginate(filteredEvents, {offset: 1, limit: 10})
+      this.setState({allEvents: filteredEvents})
+    } catch(e) {
+      console.error('error', e)
+      this.setState({error: true})
+    }
   }
 
   /**
@@ -79,12 +87,17 @@ class App extends Component {
    */
   paginate = this.paginate.bind(this)
   paginate(arr, options) {
-    let newPage = new PaginationService(arr, options)
-    this.setState({ 
-      paginate: newPage,
-      events: newPage.pageResults,
-      allEvents: this.sortEvents(data.events)
-    }, () => console.log(this.state.paginate))
+    try{
+      let newPage = new PaginationService(arr, options)
+      this.setState({ 
+        paginate: newPage,
+        events: newPage.pageResults,
+        allEvents: this.sortEvents(data.events)
+      })
+    } catch(e) {
+      console.error('error:' + e)
+      this.setState({error: true})
+    }
   }
 
   /**
@@ -115,6 +128,11 @@ class App extends Component {
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
   }
 
+  closeAlert = this.closeAlert.bind(this)
+  closeAlert() {
+    this.setState({error: false})
+  }
+
   
   
   render() {
@@ -124,6 +142,8 @@ class App extends Component {
       <div className="App">
         
         <Nav />
+
+        { (this.state.error) ? <Alert close={this.closeAlert} /> : false }
 
         <div className="container">
           <div className="row">

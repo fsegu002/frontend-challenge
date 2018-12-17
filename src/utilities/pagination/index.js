@@ -2,12 +2,15 @@ export default function PaginationService(objectArr, options) {
     this.objectArr = objectArr
     this.limit = options.limit || 10;
     this.numberOfPages = Math.ceil(objectArr.length / this.limit);
-    if(options.offset > this.numberOfPages){
-        throw Error("Offset is greater than the number of pages available.")
-    } else if(options.offset < 1 || typeof options.offset !== 'number'){
+    if(options.offset < 1 || typeof options.offset !== 'number'){
         throw Error("Offset cannot be a negative number.")
     }
-    this.offset = options.offset || 1;
+
+    if(this.objectArr.length) {
+        this.offset = options.offset;
+    } else {
+        this.offset = 0
+    }
     this.currentPage = options.offset;
 
     this.calculatePages()

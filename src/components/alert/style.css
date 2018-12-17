@@ -1,0 +1,9 @@
+.alertBlock .alertContainer{
+    position: relative;
+}
+
+.alertBlock button.close{
+    position: absolute;
+    top:5px;
+    right:25px;
+}
