@@ -1,5 +1,6 @@
+/* eslint-disable no-undef */
 import { expect } from 'chai';
-import Pagination from '../src/components/pagination';
+import Pagination from '../src/utilities/pagination';
 
 let arr = [];
 before(() => {
@@ -49,5 +50,29 @@ describe('Pagination', () => {
             limit: 10
         }
         expect(() => new Pagination(arr, options )).to.throw("Offset is greater than the number of pages available.");
+    })
+    it('should go to next page when goToNext is executed', () => {
+        let options = {
+            offset: 1,
+            limit: 10
+        }
+        let page = new Pagination(arr, options)
+        page.goToNext()
+
+        expect(page.currentPage).to.equal(2)
+        expect(page.prevPage).to.equal(1)
+        expect(page.nextPage).to.equal(3)
+    })
+    it('should go to previous page when goToPrev is executed', () => {
+        let options = {
+            offset: 4,
+            limit: 10
+        }
+        let page = new Pagination(arr, options)
+        page.goToPrev()
+
+        expect(page.currentPage).to.equal(3)
+        expect(page.prevPage).to.equal(2)
+        expect(page.nextPage).to.equal(4)
     })
 })

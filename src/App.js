@@ -4,13 +4,17 @@ import Nav from './components/nav';
 import Event from './components/event';
 import Filter from './components/filter';
 import data from './events.json';
-import Pagination from './components/pagination';
+import Pagination from './utilities/pagination';
 
 class App extends Component {
   state = {
     events: [],
     allEvents: [],
-    paginate: null
+    paginate: '',
+    pOptions: {
+      offset: 1,
+      limit: 15
+    }
   }
 
   /**
@@ -18,7 +22,6 @@ class App extends Component {
    */
   componentDidMount() {
     this.resetState()
-    this.paginate(data.events, {offset:1, limit:10})
   }
 
   /**
@@ -46,13 +49,8 @@ class App extends Component {
       }
       return false
     })
-    let paginate = new Pagination(filteredEvents, {offset: 1, limit: 10})
-    this.setState({
-      events: paginate.pageResults,
-      allEvents: filteredEvents,
-      paginate
-    })
-    
+    this.paginate(filteredEvents, {offset: 1, limit: 10})
+    this.setState({allEvents: filteredEvents})
   }
 
   /**
@@ -70,21 +68,50 @@ class App extends Component {
   resetState = this.resetState.bind(this)
   resetState() {
     const sortedEvents = this.sortEvents(data.events)
-    let newPage = new Pagination(sortedEvents, {offset: 1, limit: 10})
-    this.setState({ 
-      events: newPage.pageResults,
-      allEvents: sortedEvents,
-      paginate: newPage
-    })
+    this.paginate(sortedEvents, this.state.pOptions)
   }
 
+  /**
+   * Create new Pagination object
+   * @param {array} arr - All events to paginate through
+   * @param {object} options - Offset and limit options
+   */
   paginate = this.paginate.bind(this)
   paginate(arr, options) {
     let newPage = new Pagination(arr, options)
     this.setState({ 
       paginate: newPage,
-      events: newPage.pageResults
-    })
+      events: newPage.pageResults,
+      allEvents: this.sortEvents(data.events)
+    }, () => console.log(this.state.paginate))
+  }
+
+  /**
+   * Go to previous page
+   */
+  goToPrevPage = this.goToPrevPage.bind(this)
+  goToPrevPage() {
+    this.state.paginate.goToPrev()
+    this.setState({ events: this.state.paginate.pageResults })
+    this.scrollPageTop()
+  }
+
+  /**
+   * Go to next page
+   */
+  goToNext = this.goToNext.bind(this)
+  goToNext() {
+    this.state.paginate.goToNext()
+    this.setState({ events: this.state.paginate.pageResults })
+    this.scrollPageTop()
+  }
+
+  /**
+   * Scroll to top smoothly. 
+   * Animation is not supported in Safari, IE nor Edge
+   */
+  scrollPageTop() {
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
   }
 
   
@@ -109,6 +136,17 @@ class App extends Component {
               <ul className="list-group">
                 {allEvents}
               </ul>
+
+
+              <nav aria-label="Page navigation example">
+                <ul className="pagination">
+                  { (!this.state.paginate.prevPage) ? null : <button className="page-link" onClick={this.goToPrevPage} >Previous</button>}
+                  
+                  Page {this.state.paginate.currentPage} of {this.state.paginate.numberOfPages}
+
+                  { (!this.state.paginate.nextPage) ? null : <button className="page-link" onClick={this.goToNext} >Next</button>}
+                </ul>
+              </nav>
             </div>
           </div>
         </div>

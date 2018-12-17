@@ -5,7 +5,7 @@ import logo from './hhh_logo.png'
 class Nav extends Component {
     render() {
         return (
-            <nav >
+            <nav id="mainNav">
                 <div className="container">
                     <div className="row">
                         <div className="col-xs-12 col-md-8 offset-md-2">

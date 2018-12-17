@@ -1,4 +1,4 @@
-nav{
+nav#mainNav{
     height: 48px;
     width: 100%;
     background-color: #262a42;
@@ -6,14 +6,14 @@ nav{
     
     color: #fff;
 }
-nav .navTitle{
+nav#mainNav .navTitle{
     display: flex;
     align-items: center;
     height: 48px;
 }
-nav .navTitle img{
+nav#mainNav .navTitle img{
     margin-right: 20px;
 }
-nav .navTitle h4{
+nav#mainNav .navTitle h4{
     margin: 0;
 }
