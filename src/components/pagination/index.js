@@ -15,9 +15,10 @@ function Pagination({page, nextPage, prevPage}) {
                     { (!page.prevPage) ? <span></span> : <button className="btn btn-link" onClick={goToPrev} >Previous</button>}
                 </div>
                 
-                <div className="pageCounter">
-                    Page {page.currentPage} of {page.numberOfPages}
-                </div>
+                { 
+                (page.numberOfPages) ? <div className="pageCounter">Page {page.currentPage} of {page.numberOfPages}</div> : 
+                <div className="pageCounter">Sorry, there are no results.</div>
+                }
 
                 <div className="nextButton">
                     { (!page.nextPage) ? <span></span> : <button className="btn btn-link" onClick={goToNext} >Next</button>}
